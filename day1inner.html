@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Day 1 - Using innerHTML</title>
+        <script>
+            function addContentWithInnerHTML() {
+               
+                var container = document.getElementById("contentContainer");
+                if (container) {
+                    container.innerHTML += "<p>hloo ayush heere.</p>";
+            
+                } else {
+                       console.error("Content container not found!");
+                }
+            }
+      function changeHeading() {
+                var mainHeading = document.getElementById("mainHeading");
+                if (mainHeading) {
+                    mainHeading.innerHTML = "<h2>Day 1 - JavaScript Fun!</h2>";
+                      }
+            }
+        </script>
+    </head>
+    <body onload="addContentWithInnerHTML()">
+        <h1 id="mainHeading">Day 1</h1>
+        <p>This is the first day of learning JavaScript.</p>
+        <p>Click the button to add a new paragraph.</p>
+
+        <div id="contentContainer">
+            </div>
+
+        <button onclick="addContentWithInnerHTML()">Add Paragraph</button>
+        <button onclick="changeHeading()">Change Heading</button>
+    </body>
+</html>
