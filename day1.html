@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Day 1</title>
+        <script>
+            function addpara() {
+                var newpara = document.createElement("p"); // Corrected variable name
+                var newText = document.createTextNode("hloo ayush heere.");
+                newpara.appendChild(newText); // Corrected: no space here
+                document.body.appendChild(newpara);
+            }
+        </script>
+    </head>
+    <body onload="addpara()">
+        <h1>Day 1</h1>
+        <p>This is the first day of learning JavaScript.</p>
+        <p>Click the button to add a new paragraph.</p>
+        <button onclick="addpara()">Add Paragraph</button>
+    </body>
+</html>
