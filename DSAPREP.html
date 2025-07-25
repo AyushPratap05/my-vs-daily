@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive DSA Study Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .topic-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .topic-card.completed {
+            background-color: #E8F5E9;
+            border-color: #A5D6A7;
+        }
+        .topic-card.selected {
+            border-color: #F2A900;
+            box-shadow: 0 0 0 2px #F2A900;
+        }
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
+        }
+        .details-panel {
+            max-height: 80vh;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F1F1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D1C4E9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B39DDB;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Your Interactive DSA Roadmap</h1>
+            <p class="mt-2 text-lg text-gray-600">Track your progress through the A2Z sheet topics.</p>
+        </header>
+
+        <main>
+            <div class="mb-8 p-4 bg-white rounded-xl shadow-sm">
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Your Progress</h3>
+                <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div id="progress-bar" class="bg-gradient-to-r from-purple-400 to-indigo-500 h-4 rounded-full progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <p id="progress-text" class="text-right text-sm font-medium text-gray-600 mt-1">0 / 11 Topics Completed</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div id="topics-container" class="w-full lg:w-3/5 space-y-6">
+                </div>
+
+                <aside id="details-panel-container" class="w-full lg:w-2/5 lg:sticky top-8">
+                    <div id="details-panel" class="bg-white p-6 rounded-xl shadow-sm overflow-y-auto details-panel">
+                        <div id="details-content" class="prose max-w-none">
+                            <h2 class="text-2xl font-bold text-gray-800">Select a Topic</h2>
+                            <p class="text-gray-600">Click on any topic card to the left to see its details, learning focus, and example problems here. This will help you understand why each topic is important and what you should concentrate on.</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            
+            <section class="mt-12 p-6 bg-white rounded-xl shadow-sm">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Your Daily 1.5-Hour Study Plan</h2>
+                <div class="flex flex-col md:flex-row items-center justify-around gap-8">
+                    <div class="w-full md:w-1/2">
+                         <div class="chart-container">
+                            <canvas id="dailyPlanChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-purple-500 mr-3 mt-1">●</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">Concept Review (15-20 mins)</h4>
+                                <p class="text-gray-600 text-sm">Briefly review concepts, watch a short video, or read a summary to understand the intuition.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                             <span class="text-indigo-500 mr-3 mt-1">●</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">Problem Solving (60-70 mins)</h4>
+                                <p class="text-gray-600 text-sm">Solve 1-2 problems. Attempt independently first, then check hints or solutions if stuck. Code it out and test thoroughly.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                             <span class="text-teal-500 mr-3 mt-1">●</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">Review & Journal (10-15 mins)</h4>
+                                <p class="text-gray-600 text-sm">Review your solution, understand alternatives, and jot down key insights or patterns in a learning journal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-12">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Tips for Success</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm">
+                        <h4 class="font-semibold text-gray-700 mb-2">🎯 Set Small Goals</h4>
+                        <p class="text-gray-600 text-sm">Instead of "master DP," aim for "understand basic DP patterns this week."</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm">
+                        <h4 class="font-semibold text-gray-700 mb-2">📈 Track Your Progress</h4>
+                        <p class="text-gray-600 text-sm">Use this dashboard! Seeing your progress is highly motivating.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm">
+                        <h4 class="font-semibold text-gray-700 mb-2">🦆 Explain It Out Loud</h4>
+                        <p class="text-gray-600 text-sm">Explain the problem and solution to yourself. It solidifies understanding.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dsaTopics = [
+                {
+                    phase: 'Phase 1: Core Building Blocks & Techniques',
+                    topics: [
+                        { id: 'recursion', title: 'Recursion', why: "A fundamental programming paradigm and a prerequisite for understanding Trees, Graphs, and Dynamic Programming. You'll use it extensively.", focus: 'Base cases, recursive calls, understanding the call stack, backtracking.', problems: 'Simple recursive functions (factorial, Fibonacci), array traversals, string permutations.' },
+                        { id: 'linkedlist', title: 'Linked List', why: 'A fundamental linear data structure. Many problems involve pointers and can be solved iteratively or recursively.', focus: 'Traversal, insertion, deletion, reversing, finding middle, cycle detection.', problems: 'Reverse a LinkedList, Detect a Cycle, Merge Two Sorted Lists.' },
+                        { id: 'stackqueue', title: 'Stack & Queue', why: 'Basic ADTs crucial for many algorithms (e.g., BFS, DFS, expression evaluation).', focus: 'LIFO (Stack), FIFO (Queue), common applications.', problems: 'Valid Parentheses, Implement Queue using Stacks, Next Greater Element.' },
+                        { id: 'twopointer', title: 'Two Pointer & Sliding Window', why: 'Powerful techniques for arrays and strings that optimize solutions from O(N^2) to O(N).', focus: 'When to use two pointers, fixed-size vs. variable-size sliding windows.', problems: 'Two Sum II, Longest Substring Without Repeating Characters.' },
+                        { id: 'string', title: 'String', why: 'Many string problems leverage techniques from Arrays, Two Pointers, and sometimes even recursion.', focus: 'Palindromes, anagrams, string matching, character frequency.', problems: 'Longest Palindromic Substring, Group Anagrams.' }
+                    ]
+                },
+                {
+                    phase: 'Phase 2: Advanced Data Structures',
+                    topics: [
+                        { id: 'tree', title: 'Tree', why: 'Hierarchical data structures that heavily rely on recursion (DFS) and queues (BFS).', focus: 'Traversals (Inorder, Preorder, Postorder, Level Order), properties (height, diameter), BSTs.', problems: 'Maximum Depth of Binary Tree, Validate BST, Level Order Traversal.' },
+                        { id: 'heap', title: 'Heap (Priority Queue)', why: 'Specialized trees essential for optimization problems and certain graph algorithms.', focus: 'Min-heap, Max-heap, insertion, deletion, kth largest/smallest problems.', problems: 'Kth Largest Element in an Array, Find Median from Data Stream.' }
+                    ]
+                },
+                {
+                    phase: 'Phase 3: Complex Algorithms & Specialized Structures',
+                    topics: [
+                        { id: 'graph', title: 'Graph', why: 'The most generalized data structure, building on BFS, DFS, and heaps.', focus: 'Representations, BFS, DFS, topological sort, shortest path algorithms, MST, DSU.', problems: 'Number of Islands, Clone Graph, Course Schedule.' },
+                        { id: 'bit', title: 'Bit Manipulation', why: 'A niche but powerful topic for optimizing solutions, especially in competitive programming.', focus: 'Bitwise operators, checking/setting/clearing bits, counting set bits.', problems: 'Counting Bits, Single Number, Reverse Bits.' },
+                        { id: 'trie', title: 'Trie (Prefix Tree)', why: 'A specialized tree-like structure for efficient retrieval of keys in a dataset of strings.', focus: 'Insertion, search, prefix search, autocomplete features.', problems: 'Implement Trie, Word Search II.' }
+                    ]
+                },
+                {
+                    phase: 'Phase 4: The Grand Finale',
+                    topics: [
+                        { id: 'dp', title: 'Dynamic Programming (DP)', why: "Often considered the most challenging topic, it's a culmination of many problem-solving skills.", focus: 'Memoization (top-down), Tabulation (bottom-up), recognizing DP patterns.', problems: 'Climbing Stairs, Coin Change, Longest Increasing Subsequence.' }
+                    ]
+                }
+            ];
+
+            const topicsContainer = document.getElementById('topics-container');
+            const detailsContent = document.getElementById('details-content');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            const totalTopics = dsaTopics.reduce((acc, phase) => acc + phase.topics.length, 0);
+            let completedTopics = 0;
+            let selectedTopicId = null;
+
+            function updateProgress() {
+                completedTopics = document.querySelectorAll('.topic-checkbox:checked').length;
+                const percentage = totalTopics > 0 ? (completedTopics / totalTopics) * 100 : 0;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `${completedTopics} / ${totalTopics} Topics Completed`;
+            }
+
+            function displayTopicDetails(topic) {
+                detailsContent.innerHTML = `
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">${topic.title}</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-700">Why Learn This Next?</h3>
+                            <p class="text-gray-600">${topic.why}</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-700">Key Focus Areas</h3>
+                            <p class="text-gray-600">${topic.focus}</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-700">Example Problems</h3>
+                            <p class="text-gray-600">${topic.problems}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            dsaTopics.forEach(phase => {
+                const phaseTitle = document.createElement('h2');
+                phaseTitle.className = 'text-2xl font-bold text-gray-700';
+                phaseTitle.textContent = phase.phase;
+                topicsContainer.appendChild(phaseTitle);
+
+                const phaseGrid = document.createElement('div');
+                phaseGrid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-4';
+                
+                phase.topics.forEach(topic => {
+                    const card = document.createElement('div');
+                    card.id = `card-${topic.id}`;
+                    card.className = 'topic-card bg-white p-4 rounded-lg border-2 border-transparent cursor-pointer flex justify-between items-center';
+                    card.innerHTML = `
+                        <span class="font-semibold text-gray-800">${topic.title}</span>
+                        <input type="checkbox" class="topic-checkbox form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500" data-id="${topic.id}">
+                    `;
+                    
+                    card.addEventListener('click', (e) => {
+                        if (e.target.type !== 'checkbox') {
+                           if (selectedTopicId) {
+                                document.getElementById(`card-${selectedTopicId}`).classList.remove('selected');
+                           }
+                           selectedTopicId = topic.id;
+                           card.classList.add('selected');
+                           displayTopicDetails(topic);
+                        }
+                    });
+
+                    const checkbox = card.querySelector('.topic-checkbox');
+                    checkbox.addEventListener('change', (e) => {
+                        e.stopPropagation();
+                        const cardElement = document.getElementById(`card-${topic.id}`);
+                        if (e.target.checked) {
+                            cardElement.classList.add('completed');
+                        } else {
+                            cardElement.classList.remove('completed');
+                        }
+                        updateProgress();
+                    });
+
+                    phaseGrid.appendChild(card);
+                });
+                topicsContainer.appendChild(phaseGrid);
+            });
+
+            const ctx = document.getElementById('dailyPlanChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Concept Review', 'Problem Solving', 'Journaling'],
+                    datasets: [{
+                        label: 'Time Allocation (in mins)',
+                        data: [20, 70, 15],
+                        backgroundColor: [
+                            'rgba(192, 132, 252, 0.6)',
+                            'rgba(99, 102, 241, 0.6)',
+                            'rgba(20, 184, 166, 0.6)',
+                        ],
+                        borderColor: [
+                            'rgba(192, 132, 252, 1)',
+                            'rgba(99, 102, 241, 1)',
+                            'rgba(20, 184, 166, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Minutes'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw} mins`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
