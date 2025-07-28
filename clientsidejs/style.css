@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    color: #0056b3;
+    transition: color 0.3s ease; /* Smooth transition for color changes */
+}
+
+.controls button,
+#add-item-btn {
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.controls button:hover,
+#add-item-btn:hover {
+    background-color: #0056b3;
+}
+
+#dynamic-list {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+#dynamic-list li {
+    background-color: #e9ecef;
+    margin-bottom: 5px;
+    padding: 8px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+#dynamic-list li.highlight { /* A class we'll add with JS */
+    background-color: #d1ecf1;
+    border-left: 5px solid #007bff;
+}
+
+#hover-box {
+    width: 200px;
+    height: 100px;
+    background-color: lightgray;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+#hover-box.hovered { /* A class we'll add with JS on hover */
+    background-color: #28a745; /* Green */
+    color: white;
+    font-weight: bold;
+}
