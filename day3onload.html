@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Day 1 - Window Onload</title>
+        <script>
+            function addContentWithStyle() {
+                var container = document.getElementById("contentContainer");
+                if (container) {
+                    var newpara = document.createElement("p");
+                    var newText = document.createTextNode("hloo ayush heere.");
+
+                    newpara.style.color = "blue";
+                    newpara.style.fontWeight = "bold";
+                    newpara.style.backgroundColor = "lightyellow";
+                    newpara.style.padding = "5px";
+
+                    newpara.appendChild(newText);
+                    container.appendChild(newpara);
+                } else {
+                    console.error("Content container not found!");
+                }
+            }
+
+            function changeHeadingStyle() {
+                var mainHeading = document.getElementById("mainHeading");
+                if (mainHeading) {
+                    mainHeading.style.color = "purple";
+                    mainHeading.style.textDecoration = "underline";
+                    mainHeading.style.fontSize = "3em";
+                    mainHeading.style.fontFamily = "Arial, sans-serif";
+                }
+            }
+
+          
+            window.onload = function() {
+                console.log("Window fully loaded!");
+                addContentWithStyle(); 
+            };
+
+
+        </script>
+    </head>
+    <body>
+        <h1 id="mainHeading">Day 3</h1>
+        <p>This is the third  day of learning JavaScript.</p>
+        <p>Click the buttons below to see styling changes.</p>
+
+        <div id="contentContainer">
+            </div>
+
+        <button onclick="addContentWithStyle()">Add Styled Paragraph</button>
+        <button onclick="changeHeadingStyle()">Change Heading Style</button>
+    </body>
+</html>
