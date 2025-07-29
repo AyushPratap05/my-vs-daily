@@ -1,0 +1,123 @@
+/* General Body Styling */
+body {
+    background-color: black; /* New */
+    font-family: arial;      /* New */
+    color: white;            /* New */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main Calculator Container Styling */
+.maindiv { /* New class entry */
+    background-color: white;
+    color: black;
+    width: 300px;
+    padding: 20px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Added for better appearance, consistent with common calculator designs */
+}
+
+/* Heading Styling */
+h1 {
+    color: grey;      /* New */
+    font-family: verdana; /* New */
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+/* Input Group and Input Field Styling */
+.input-group {
+    margin-bottom: 18px;
+    text-align: left; /* Keep text left-aligned inside the input group */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555; /* Keep a readable color for labels inside the white div */
+}
+
+.input-group input[type="number"],
+.input-group input[type="range"], /* Apply to range input as well */
+.input-group input[type="text"] { /* Apply to text input (for years) */
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 12px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1.1em;
+    box-sizing: border-box;
+}
+
+.input-group input[type="number"]:focus,
+.input-group input[type="range"]:focus,
+.input-group input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Rate value span styling (optional, but good for visibility) */
+#rate_val {
+    font-weight: bold;
+    color: #007bff; /* A distinct color for the value */
+    margin-left: 5px;
+}
+
+
+/* Button Styling */
+#calculateBtn {
+    background-color: #28a745; /* Green button */
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+}
+
+#calculateBtn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Result Span Styling */
+#result { /* This is the new span for results */
+    display: block; /* Make it a block element to take full width */
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #e9f5ff; /* Light blue background for results */
+    border: 1px solid #cce5ff; /* Light blue border */
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #0056b3; /* Darker blue for text */
+    min-height: 20px; /* Ensure it has some height even if empty initially */
+}
+
+
+/* Footer Styling */
+footer {
+    margin-top: 30px; /* Space from the calculator */
+    font-size: 0.9em;
+    color: grey; /* Keep consistent with h1 or a slightly lighter grey */
+    text-align: center;
+}
+
+/* Error Message Styling (if still used by JS, though instructions point to #result) */
+/* If your JavaScript still uses #error-message, keep this style */
+/* If not, you can remove this block */
+.error-message {
+    color: #dc3545; /* Red for errors */
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 20px; /* Reserve space to prevent layout shift */
+}

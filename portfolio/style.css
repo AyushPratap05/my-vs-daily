@@ -1,0 +1,379 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Light background like the image */
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth; /* Smooth scrolling for navigation links */
+    box-sizing: border-box; /* Include padding/border in element's total width/height */
+}
+
+/* Header (for Name and Nav Bar) */
+.header {
+    background-color: #3f3f3f; /* Dark grey from image */
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Task 1: Fixed header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* Task 1 & 8: Styled Name and Home Icon */
+.name-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and name */
+}
+
+.home-icon {
+    color: #1e51e9; /* Pink/Purple color from image */
+    font-size: 1.6em; /* Slightly smaller icon */
+    transition: color 0.3s ease;
+    text-decoration: none; /* Remove underline */
+}
+
+.home-icon:hover {
+    color: #40e9ff; /* Lighter pink/purple on hover */
+}
+
+.my-name {
+    font-size: 1.6em; /* Matches image */
+    font-weight: bold;
+    color: #38083a; /* Pink/Purple color from image */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.my-name:hover {
+    color: #ffd240; /* Lighter pink/purple on hover */
+}
+
+
+/* Task 2: Navigation Bar */
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    margin-left: 30px; /* Space between nav items */
+}
+
+.navbar a {
+    color: #bbd535; /* Pink/Purple color from image */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 0;
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for hover */
+}
+
+.navbar a:hover { /* Task 2: Hover effect */
+    color: #fda8c4; /* Lighter pink/purple on hover */
+    text-decoration: underline;
+}
+
+/* Main content padding to account for fixed header */
+main {
+    padding-top: 80px; /* Adjust based on your header height */
+}
+
+/* Common Section Styling */
+.section {
+    padding: 60px 40px;
+    margin: 0 auto;
+    max-width: 960px;
+    background-color: white; /* White background for sections */
+    box-shadow: 0 2px 10px rgba(3, 3, 3, 0.05); /* Subtle shadow */
+    margin-bottom: 20px;
+    border-radius: 8px; /* Slightly rounded corners */
+}
+
+.section h2 {
+    text-align: left; /* Heading aligned left, matching image */
+    color: #3f3f3f; /* Dark grey for section headings */
+    margin-bottom: 40px;
+    font-size: 2.2em; /* Adjusted font size */
+    border-bottom: 2px solid #eee; /* Subtle bottom border for headings */
+    padding-bottom: 15px;
+}
+
+/* Task 3: About Me Section */
+.about-me-section h2 {
+    /* "Hi, I'm Jane Doe! 👋" is the h2. Image shows it left-aligned within the flex container */
+    text-align: left;
+    border-bottom: none; /* No border for this specific H2 if it's the main greeting */
+    margin-bottom: 20px; /* Adjust spacing */
+}
+
+.about-me-section .about-me-flex-container {
+    display: flex;
+    align-items: flex-start; /* Aligns items to the top */
+    gap: 40px; /* Space between image and text */
+}
+
+.about-me-section .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px; /* Slightly rounded corners, not fully circular */
+    object-fit: cover;
+    border: 2px solid #ccc; /* Subtle border around image */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.about-me-section .about-me-text-content h2 {
+    color: #3f3f3f; /* Dark grey for the "Hi, I'm Jane Doe!" heading */
+    font-size: 2.5em; /* Larger font for greeting */
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.about-me-section .about-me-text-content p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Responsive adjustment for About Me */
+@media (max-width: 768px) {
+    .about-me-section .about-me-flex-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .about-me-section .about-me-text-content h2 {
+        text-align: center;
+    }
+}
+
+
+/* Task 4: Skills Section */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Adjusted grid for more compact items */
+    gap: 20px;
+    justify-items: center;
+    text-align: center;
+}
+
+.skill-item {
+    background-color: white; /* White background */
+    padding: 20px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    border: 1px solid #eee; /* Light border */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.skill-logo {
+    font-size: 3em; /* For Font Awesome icons */
+    color: #e9691e; /* Pink/Purple color for icons */
+    margin-bottom: 10px;
+}
+
+.skill-item p {
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.skill-experience {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+
+/* Task 5: Projects Section */
+.projects-list { /* Changed from grid to list-like structure */
+    list-style: none; /* Remove default list bullets if using custom */
+    padding: 0;
+}
+
+.project-item {
+    background-color: white; /* Explicitly white, no background in image */
+    box-shadow: none; /* No shadow as per image */
+    border: none; /* No border as per image */
+    padding: 0 0 20px 0; /* Only bottom padding for spacing */
+    margin-bottom: 25px; /* Spacing between projects */
+}
+
+.project-item h3 {
+    color: #3f3f3f; /* Dark grey */
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.project-item ul {
+    list-style: disc; /* Standard bullet points */
+    margin-left: 25px;
+    padding: 0;
+}
+
+.project-item li {
+    font-size: 1em;
+    margin-bottom: 5px; /* Space between bullet points */
+}
+
+/* Task 6, 7: Recommendations Section */
+.recommendations-section #recommendations-list {
+    margin-bottom: 40px;
+}
+
+.recommendation-item {
+    background-color: #f8f8f8; /* Light grey background */
+    border-left: 5px solid #5c2839; /* Pink/Purple left border from image */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle shadow */
+}
+
+.recommendation-item p {
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.recommender {
+    font-weight: bold;
+    text-align: right; /* Recommender name right-aligned */
+    color: #e9e91e; /* Pink/Purple color for recommender */
+    margin-top: 15px;
+}
+
+/* Recommendation Form */
+#recommendation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #f0f0f0; /* Slightly darker grey background for the form */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#recommendation-form h3 {
+    text-align: center; /* "Leave a Recommendation" heading centered */
+    color: #3f3f3f;
+    margin-top: 0;
+}
+
+#recommendation-form textarea,
+#recommendation-form input[type="text"] {
+    width: calc(100% - 22px); /* Adjust for padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+#recommendation-form textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+#recommendation-form button {
+    background-color: #007470; /* Pink/Purple button from image */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    align-self: flex-end; /* Align button to the right */
+    width: 120px; /* Fixed width for the button */
+}
+
+#recommendation-form button:hover {
+    background-color: #ff4081; /* Lighter pink/purple on hover */
+}
+
+/* Scroll-to-top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #471ee9; /* Pink/Purple color */
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+    z-index: 999;
+}
+
+.scroll-to-top:hover {
+    background-color: #ff4081;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 10px 15px;
+    }
+    .navbar ul {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .navbar li {
+        margin: 5px 15px;
+    }
+    .section {
+        padding: 40px 20px;
+    }
+    .about-me-section .about-me-flex-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .about-me-section .about-me-text-content h2 {
+        text-align: center;
+    }
+    .skills-grid, .projects-list {
+        display: block; /* Stack items on small screens */
+    }
+    .skill-item, .project-item {
+        margin-bottom: 20px;
+    }
+    .project-item ul {
+        margin-left: 15px; /* Adjust bullet point indentation */
+    }
+    #recommendation-form button {
+        align-self: center; /* Center button on small screens */
+    }
+}
+
+/* Ensure sections are targetable by nav links */
+section[id] {
+    scroll-margin-top: 80px; /* Offset for fixed header */
+}
