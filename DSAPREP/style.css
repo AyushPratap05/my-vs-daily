@@ -1,0 +1,127 @@
+/* Custom Styles for DSA Study Guide */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FDFBF8;
+    color: #4A4A4A;
+}
+
+/* Topic Card Transitions and States */
+.topic-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.topic-card.completed {
+    background-color: #E8F5E9; /* Light green */
+    border-color: #A5D6A7;     /* Medium green */
+}
+
+.topic-card.selected {
+    border-color: #F2A900; /* Orange-yellow for selection */
+    box-shadow: 0 0 0 2px #F2A900;
+}
+
+/* Progress Bar Animation */
+.progress-bar-fill {
+    transition: width 0.5s ease-in-out;
+}
+
+/* Details Panel Scrolling */
+.details-panel {
+    max-height: 80vh; /* Limits height for scrolling */
+}
+
+/* Chart Container Sizing */
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Max width for larger screens */
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    max-height: 300px;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F1F1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D1C4E9; /* Light purple */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #B39DDB; /* Darker purple on hover */
+}
+
+/* Loading Overlay Styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+    font-size: 1.5rem;
+    color: #6B46C1; /* Purple text */
+    flex-direction: column;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #6B46C1; /* Purple spinner */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite; /* Spin animation */
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error Message Styles */
+.error-message {
+    color: #dc3545; /* Red */
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+    padding: 10px;
+    background-color: #ffebee; /* Light red background */
+    border-radius: 8px;
+    border: 1px solid #ef9a9a;
+}
+
+/* Gemini API Response Styles */
+.gemini-response {
+    background-color: #f8f8f8;
+    border-left: 4px solid #F2A900; /* Orange-yellow left border */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #333;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks from API response */
+}
+
+.gemini-loading {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
+}
